@@ -1,220 +1,863 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Trigonometri: Konsep dan Dasar-Dasarnya</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Literata:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#f2f6fb; --surface:#ffffff; --ink:#13203a; --muted:#53617c; --line:#c9d5e6;
-  --sin:#1f5fe0; --cos:#e0562b; --tan:#15936a; --grid:#dbe5f2;
-}
-@media (prefers-color-scheme:dark){
-  :root{--bg:#0e1628; --surface:#16213a; --ink:#e8eefb; --muted:#a2b0cc; --line:#2c3b5c; --sin:#6b9bff; --cos:#ff8a5f; --tan:#43d1a1; --grid:#1c2a47;}
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'Literata',Georgia,serif;font-size:1.05rem;line-height:1.75;
-  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:32px 32px}
-h1,h2,h3,nav,button,label,th{font-family:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif}
-a{color:inherit}
-:focus-visible{outline:3px solid var(--sin);outline-offset:2px}
-nav{position:sticky;top:0;z-index:5;display:flex;gap:1.25rem;flex-wrap:wrap;padding:.7rem 1.25rem;background:var(--surface);border-bottom:1px solid var(--line);font-weight:500;font-size:.95rem}
-nav a{text-decoration:none;color:var(--muted)} nav a:hover{color:var(--ink)}
-nav b{margin-right:auto;font-weight:800;color:var(--ink)}
-.wrap{max-width:1040px;margin:0 auto;padding:0 1.25rem}
-.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:2rem;align-items:center;padding:3rem 0 2.5rem}
-h1{font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.02;margin:0 0 1rem;font-weight:800;letter-spacing:-.02em}
-.lead{color:var(--muted);max-width:34rem;margin:0 0 1.5rem}
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.25rem}
-.circle-panel svg{width:100%;height:auto;display:block}
-.slider{display:flex;align-items:center;gap:.75rem;margin-top:.5rem}
-.slider input{flex:1;accent-color:var(--sin)}
-.vals{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:.75rem;text-align:center;font-family:'Bricolage Grotesque',sans-serif}
-.vals div{border:1px solid var(--line);border-radius:8px;padding:.35rem .2rem;font-size:.85rem;color:var(--muted)}
-.vals strong{display:block;font-size:1.15rem;color:var(--ink)}
-.s{color:var(--sin)}.c{color:var(--cos)}.t{color:var(--tan)}
-.vals .s strong{color:var(--sin)}.vals .c strong{color:var(--cos)}.vals .t strong{color:var(--tan)}
-section{padding:2.5rem 0;border-top:1px solid var(--line)}
-h2{font-size:clamp(1.7rem,4vw,2.4rem);margin:0 0 .75rem;letter-spacing:-.01em}
-h3{margin:1.5rem 0 .4rem;font-size:1.2rem}
-p{max-width:44rem;margin:.5rem 0}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start}
-.formula{display:flex;gap:.75rem;flex-wrap:wrap;margin:1rem 0}
-.formula div{flex:1 1 150px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem;font-family:'Bricolage Grotesque',sans-serif;font-size:1.2rem;font-weight:700}
-.formula small{display:block;font-weight:500;font-size:.85rem;color:var(--muted)}
-.mnemonic{background:var(--ink);color:var(--bg);border-radius:10px;padding:.9rem 1.1rem;max-width:44rem;margin:1rem 0}
-table{border-collapse:collapse;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;text-align:center}
-th,td{padding:.55rem .6rem;border-bottom:1px solid var(--line)}
-th{background:var(--grid);font-weight:700}
-.scroll{overflow-x:auto}
-label{font-weight:500;font-size:.95rem}
-input[type=number]{width:5.5rem;padding:.4rem;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit}
-.row{display:flex;gap:1rem;flex-wrap:wrap;margin:.6rem 0}
-.out{font-family:'Bricolage Grotesque',sans-serif;line-height:1.9}
-button{font-weight:700;border:0;border-radius:8px;padding:.55rem 1rem;background:var(--sin);color:#fff;cursor:pointer;font-size:.95rem}
-button.alt{background:var(--surface);color:var(--ink);border:1px solid var(--line);margin:.2rem .3rem .2rem 0}
-button.alt.ok{background:var(--tan);color:#fff;border-color:var(--tan)} button.alt.no{background:var(--cos);color:#fff;border-color:var(--cos)}
-.q{margin:1rem 0;padding:1rem;background:var(--surface);border:1px solid var(--line);border-radius:10px}
-.q p{margin:0 0 .5rem;font-weight:600}
-footer{padding:2rem 0 3rem;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
-@media(max-width:800px){.hero,.two{grid-template-columns:1fr}nav b{flex-basis:100%}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trigonometri Kelas X — Sinergi Sudut</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0b0f1c;
+            color: #e8edf5;
+            overflow-x: hidden;
+        }
+
+        /* Latar belakang gradien & pola unik */
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(circle at 20% 30%, #1e2b4a 0%, #0b0f1c 70%);
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(100, 180, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 180, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: drift 20s linear infinite;
+        }
+
+        @keyframes drift {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
+        /* Navbar */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            background: rgba(11, 15, 28, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(100, 180, 255, 0.15);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #7dd3fc, #c084fc, #f0abfc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #b0c4de;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #7dd3fc, #c084fc);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1 1 400px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .hero-text h1 .highlight {
+            background: linear-gradient(135deg, #7dd3fc, #c084fc, #f0abfc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: #9bb0d0;
+            margin-bottom: 2rem;
+            max-width: 550px;
+            line-height: 1.7;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(124, 58, 237, 0.5);
+        }
+
+        /* Ilustrasi lingkaran trigonometri interaktif */
+        .hero-visual {
+            flex: 1 1 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .circle-container {
+            position: relative;
+            width: 380px;
+            height: 380px;
+        }
+
+        .unit-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 2px solid rgba(125, 211, 252, 0.5);
+            background: radial-gradient(circle, rgba(125, 211, 252, 0.05) 0%, transparent 70%);
+            box-shadow: 0 0 60px rgba(125, 211, 252, 0.15);
+        }
+
+        .axis-x, .axis-y {
+            position: absolute;
+            background: rgba(200, 220, 255, 0.25);
+        }
+
+        .axis-x {
+            top: 50%;
+            left: 5%;
+            width: 90%;
+            height: 1px;
+            transform: translateY(-50%);
+        }
+
+        .axis-y {
+            left: 50%;
+            top: 5%;
+            width: 1px;
+            height: 90%;
+            transform: translateX(-50%);
+        }
+
+        .angle-arc {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 2px dashed rgba(192, 132, 252, 0.6);
+            transform: translate(-50%, -50%);
+        }
+
+        .radius-line {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, #7dd3fc, #c084fc);
+            transform-origin: left center;
+            transform: rotate(-45deg);
+            box-shadow: 0 0 15px rgba(125, 211, 252, 0.6);
+        }
+
+        .point-on-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #f0abfc;
+            transform: translate(calc(-50% + 106px), calc(-50% - 106px));
+            box-shadow: 0 0 20px #f0abfc;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 15px #f0abfc; }
+            50% { box-shadow: 0 0 35px #f0abfc; }
+        }
+
+        .sin-label, .cos-label, .tan-label {
+            position: absolute;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .sin-label {
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #7dd3fc;
+        }
+
+        .cos-label {
+            top: 50%;
+            right: 30px;
+            transform: translateY(-50%);
+            color: #c084fc;
+        }
+
+        .tan-label {
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #f0abfc;
+        }
+
+        /* Section umum */
+        section {
+            padding: 5rem 5%;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #9bb0d0;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        /* Kartu materi */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: rgba(20, 30, 55, 0.6);
+            border: 1px solid rgba(125, 211, 252, 0.15);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.35s;
+            backdrop-filter: blur(8px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #7dd3fc, #c084fc, #f0abfc);
+            opacity: 0;
+            transition: opacity 0.35s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(192, 132, 252, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: #e0eaff;
+        }
+
+        .card p {
+            color: #9bb0d0;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .formula {
+            display: inline-block;
+            background: rgba(125, 211, 252, 0.1);
+            border: 1px solid rgba(125, 211, 252, 0.25);
+            padding: 0.4rem 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            color: #7dd3fc;
+            margin-top: 0.8rem;
+        }
+
+        /* Tabel sudut istimewa */
+        .special-angles {
+            margin-top: 4rem;
+            background: rgba(20, 30, 55, 0.6);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(125, 211, 252, 0.15);
+            overflow-x: auto;
+        }
+
+        .special-angles h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #e0eaff;
+            font-size: 1.4rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 500px;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(125, 211, 252, 0.1);
+        }
+
+        th {
+            color: #7dd3fc;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        td {
+            color: #c8d6e5;
+            font-family: 'Courier New', monospace;
+            font-size: 1.05rem;
+        }
+
+        tr:hover td {
+            background: rgba(125, 211, 252, 0.04);
+        }
+
+        /* Kuis */
+        .quiz-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(20, 30, 55, 0.7);
+            border-radius: 24px;
+            padding: 2.5rem;
+            border: 1px solid rgba(192, 132, 252, 0.25);
+            backdrop-filter: blur(10px);
+        }
+
+        .quiz-question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #e0eaff;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-option {
+            padding: 1rem 1.2rem;
+            background: rgba(125, 211, 252, 0.05);
+            border: 1px solid rgba(125, 211, 252, 0.2);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-size: 1rem;
+            color: #c8d6e5;
+        }
+
+        .quiz-option:hover {
+            background: rgba(125, 211, 252, 0.12);
+            border-color: rgba(125, 211, 252, 0.5);
+            transform: translateX(5px);
+        }
+
+        .quiz-option.selected {
+            background: rgba(192, 132, 252, 0.2);
+            border-color: #c084fc;
+            color: #fff;
+        }
+
+        .quiz-option.correct {
+            background: rgba(74, 222, 128, 0.15);
+            border-color: #4ade80;
+            color: #4ade80;
+        }
+
+        .quiz-option.wrong {
+            background: rgba(248, 113, 113, 0.15);
+            border-color: #f87171;
+            color: #f87171;
+        }
+
+        .quiz-feedback {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            min-height: 1.5rem;
+        }
+
+        .quiz-btn {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
+        }
+
+        .quiz-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 5%;
+            border-top: 1px solid rgba(125, 211, 252, 0.1);
+            color: #7a8aa8;
+            font-size: 0.9rem;
+        }
+
+        footer .footer-brand {
+            font-weight: 700;
+            background: linear-gradient(135deg, #7dd3fc, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero {
+                padding-top: 2rem;
+                padding-bottom: 3rem;
+                text-align: center;
+            }
+
+            .hero-text p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .circle-container {
+                width: 280px;
+                height: 280px;
+            }
+
+            .unit-circle {
+                width: 220px;
+                height: 220px;
+            }
+
+            .radius-line {
+                width: 110px;
+            }
+
+            .point-on-circle {
+                transform: translate(calc(-50% + 78px), calc(-50% - 78px));
+            }
+
+            .angle-arc {
+                width: 90px;
+                height: 90px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .special-angles {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-<nav aria-label="Navigasi utama"><b>Trigonometri</b><a href="#konsep">Konsep dasar</a><a href="#rasio">Sin, cos, tan</a><a href="#istimewa">Sudut istimewa</a><a href="#identitas">Identitas</a><a href="#kuis">Kuis</a></nav>
+    <div class="bg-glow"></div>
+    <div class="bg-grid"></div>
 
-<main class="wrap">
-<header class="hero">
-  <div>
-    <h1>Trigonometri: mengukur segitiga lewat sudutnya</h1>
-    <p class="lead">Trigonometri menghubungkan besar sudut dengan perbandingan panjang sisi. Dari menaksir tinggi pohon sampai membaca gelombang suara, semuanya berawal dari segitiga siku-siku. Geser sudut di lingkaran satuan dan lihat nilainya berubah langsung.</p>
-    <a href="#konsep"><button type="button">Mulai belajar</button></a>
-  </div>
-  <div class="panel circle-panel">
-    <svg viewBox="-150 -140 300 280" role="img" aria-label="Lingkaran satuan interaktif">
-      <line x1="-130" y1="0" x2="130" y2="0" stroke="var(--line)"/><line x1="0" y1="-125" x2="0" y2="125" stroke="var(--line)"/>
-      <circle r="100" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
-      <path id="arc" fill="none" stroke="var(--muted)" stroke-width="2"/>
-      <line id="sinL" stroke="var(--sin)" stroke-width="4" stroke-linecap="round"/>
-      <line id="cosL" stroke="var(--cos)" stroke-width="4" stroke-linecap="round"/>
-      <line id="rad" x1="0" y1="0" stroke="var(--ink)" stroke-width="2"/>
-      <circle id="pt" r="6" fill="var(--ink)"/>
-      <text x="104" y="-6" fill="var(--muted)" font-size="11">1</text>
-    </svg>
-    <div class="slider"><label for="ang">Sudut θ</label><input id="ang" type="range" min="0" max="360" value="40"><b id="angv" style="font-family:'Bricolage Grotesque',sans-serif">40°</b></div>
-    <div class="vals"><div class="s">sin θ<strong id="vs"></strong></div><div class="c">cos θ<strong id="vc"></strong></div><div class="t">tan θ<strong id="vt"></strong></div><div>radian<strong id="vr"></strong></div></div>
-  </div>
-</header>
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">
+            <span>△</span> Trigonometri
+        </div>
+        <ul class="nav-links">
+            <li><a href="#materi">Materi</a></li>
+            <li><a href="#sudut-istimewa">Sudut Istimewa</a></li>
+            <li><a href="#kuis">Kuis</a></li>
+        </ul>
+    </nav>
 
-<section id="konsep">
-  <h2>Konsep dasar</h2>
-  <p>Trigonometri berasal dari bahasa Yunani: <i>trigonon</i> (segitiga) dan <i>metron</i> (ukuran). Objek utamanya adalah segitiga siku-siku, yaitu segitiga dengan satu sudut 90°.</p>
-  <div class="two">
-    <div>
-      <h3>Nama-nama sisi</h3>
-      <p>Pada segitiga siku-siku, pilih satu sudut lancip sebagai acuan (θ). Nama sisi bergantung pada sudut acuan itu:</p>
-      <p><b>Sisi miring</b> (hipotenusa): sisi terpanjang, berhadapan dengan sudut 90°.<br>
-      <b>Sisi depan</b>: sisi yang berhadapan dengan sudut θ.<br>
-      <b>Sisi samping</b>: sisi yang menempel pada θ selain sisi miring.</p>
-      <p>Ketiga sisi terhubung oleh teorema Pythagoras: <b>depan² + samping² = miring²</b>.</p>
-    </div>
-    <div class="panel">
-      <svg viewBox="0 0 260 190" role="img" aria-label="Segitiga siku-siku dengan sisi depan, samping, dan miring" style="width:100%;height:auto">
-        <polygon points="30,160 220,160 220,30" fill="var(--grid)" stroke="var(--ink)" stroke-width="2"/>
-        <path d="M205 160 v-15 h15" fill="none" stroke="var(--ink)"/>
-        <path d="M70 160 A40 40 0 0 0 64 143" fill="none" stroke="var(--muted)" stroke-width="2"/>
-        <text x="80" y="153" fill="var(--ink)" font-size="15">θ</text>
-        <text x="100" y="182" fill="var(--cos)" font-size="14" font-weight="700">samping</text>
-        <text x="226" y="100" fill="var(--sin)" font-size="14" font-weight="700">depan</text>
-        <text x="95" y="86" fill="var(--tan)" font-size="14" font-weight="700" transform="rotate(-34 95 86)">miring</text>
-      </svg>
-    </div>
-  </div>
-  <h3>Sudut: derajat dan radian</h3>
-  <p>Satu putaran penuh adalah 360°, atau 2π radian. Jadi 180° = π rad, dan untuk mengubah derajat ke radian kalikan dengan π/180.</p>
-</section>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Jelajahi <span class="highlight">Dunia Sudut</span> &amp; Rasio Trigonometri</h1>
+            <p>Trigonometri bukan sekadar hafalan rumus. Ia adalah bahasa universal untuk memahami harmoni segitiga, gelombang, dan gerak melingkar. Mari kita mulai petualangan dari lingkaran satuan.</p>
+            <a href="#materi" class="cta-button">Mulai Belajar →</a>
+        </div>
+        <div class="hero-visual">
+            <div class="circle-container">
+                <div class="unit-circle"></div>
+                <div class="axis-x"></div>
+                <div class="axis-y"></div>
+                <div class="angle-arc"></div>
+                <div class="radius-line"></div>
+                <div class="point-on-circle"></div>
+                <div class="sin-label">sin θ</div>
+                <div class="cos-label">cos θ</div>
+                <div class="tan-label">tan θ</div>
+            </div>
+        </div>
+    </section>
 
-<section id="rasio">
-  <h2>Perbandingan trigonometri</h2>
-  <p>Tiga perbandingan utama membandingkan dua sisi segitiga siku-siku. Nilainya hanya bergantung pada sudut, bukan pada ukuran segitiga.</p>
-  <div class="formula">
-    <div class="s">sin θ = depan / miring<small>sinus</small></div>
-    <div class="c">cos θ = samping / miring<small>kosinus</small></div>
-    <div class="t">tan θ = depan / samping<small>tangen</small></div>
-  </div>
-  <div class="mnemonic">Pengingat: <b>SOH-CAH-TOA</b>. Sin = Opposite/Hypotenuse, Cos = Adjacent/Hypotenuse, Tan = Opposite/Adjacent. Dalam bahasa Indonesia: <b>Sin-De-Mi, Cos-Sa-Mi, Tan-De-Sa</b>.</div>
-  <p>Kebalikannya: cosecant (csc) = 1/sin, secant (sec) = 1/cos, dan cotangent (cot) = 1/tan.</p>
+    <!-- MATERI -->
+    <section id="materi">
+        <h2 class="section-title">📐 Konsep Inti</h2>
+        <p class="section-subtitle">Tiga rasio dasar yang menjadi fondasi seluruh trigonometri</p>
 
-  <h3>Coba hitung sendiri</h3>
-  <div class="panel">
-    <div class="row">
-      <label>Sisi depan <input id="a" type="number" value="3" min="0.1" step="0.1"></label>
-      <label>Sisi samping <input id="b" type="number" value="4" min="0.1" step="0.1"></label>
-    </div>
-    <div class="out" id="calc"></div>
-  </div>
-</section>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">📏</div>
+                <h3>Sinus (sin)</h3>
+                <p>Perbandingan sisi depan sudut dengan sisi miring pada segitiga siku-siku. Dalam lingkaran satuan, sin θ adalah koordinat-y dari titik pada lingkaran.</p>
+                <div class="formula">sin θ = depan / miring</div>
+            </div>
 
-<section id="istimewa">
-  <h2>Sudut istimewa</h2>
-  <p>Lima sudut ini muncul terus di soal dan perlu dihafal. Pola sin: √0/2, √1/2, √2/2, √3/2, √4/2. Cos adalah urutan sebaliknya.</p>
-  <div class="scroll"><table>
-    <tr><th>θ</th><th>0°</th><th>30°</th><th>45°</th><th>60°</th><th>90°</th></tr>
-    <tr><th class="s">sin</th><td>0</td><td>1/2</td><td>½√2</td><td>½√3</td><td>1</td></tr>
-    <tr><th class="c">cos</th><td>1</td><td>½√3</td><td>½√2</td><td>1/2</td><td>0</td></tr>
-    <tr><th class="t">tan</th><td>0</td><td>⅓√3</td><td>1</td><td>√3</td><td>tak terdefinisi</td></tr>
-  </table></div>
-  <h3>Tanda di tiap kuadran</h3>
-  <p>Di lingkaran satuan, cos adalah koordinat x dan sin adalah koordinat y. Karena itu: kuadran I semua positif, kuadran II hanya sin positif, kuadran III hanya tan positif, dan kuadran IV hanya cos positif. Coba geser sudut di atas dan amati tandanya.</p>
-</section>
+            <div class="card">
+                <div class="card-icon">📐</div>
+                <h3>Cosinus (cos)</h3>
+                <p>Perbandingan sisi samping sudut dengan sisi miring. Dalam lingkaran satuan, cos θ adalah koordinat-x dari titik pada lingkaran.</p>
+                <div class="formula">cos θ = samping / miring</div>
+            </div>
 
-<section id="identitas">
-  <h2>Identitas dasar</h2>
-  <p>Titik pada lingkaran satuan memenuhi x² + y² = 1. Karena x = cos θ dan y = sin θ, kita dapatkan identitas paling penting:</p>
-  <div class="formula">
-    <div>sin²θ + cos²θ = 1</div>
-    <div>tan θ = sin θ / cos θ</div>
-    <div>1 + tan²θ = sec²θ</div>
-  </div>
-  <p>Identitas ini memungkinkan kita mencari sin, cos, atau tan jika salah satunya sudah diketahui. Contoh: jika sin θ = 3/5 dan θ lancip, maka cos θ = √(1 − 9/25) = 4/5.</p>
-</section>
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>Tangen (tan)</h3>
+                <p>Perbandingan sisi depan dengan sisi samping. Tangen juga dapat dipahami sebagai kemiringan (gradien) garis dari pusat ke titik pada lingkaran.</p>
+                <div class="formula">tan θ = depan / samping</div>
+            </div>
 
-<section id="kuis">
-  <h2>Kuis singkat</h2>
-  <div id="quiz"></div>
-</section>
-</main>
+            <div class="card">
+                <div class="card-icon">🔄</div>
+                <h3>Identitas Pythagoras</h3>
+                <p>Hubungan mendasar antara sin dan cos yang berasal dari teorema Pythagoras pada lingkaran satuan.</p>
+                <div class="formula">sin²θ + cos²θ = 1</div>
+            </div>
 
-<footer><div class="wrap">Materi trigonometri dasar untuk pelajar SMA/SMK. Sumber visual dibuat langsung dengan SVG dan JavaScript.</div></footer>
+            <div class="card">
+                <div class="card-icon">🧭</div>
+                <h3>Sudut Berelasi</h3>
+                <p>Nilai trigonometri di kuadran berbeda dapat diturunkan dari sudut lancip. Misalnya, sin(180° − θ) = sin θ.</p>
+                <div class="formula">sin(180° − θ) = sin θ</div>
+            </div>
 
-<script>
-const $=id=>document.getElementById(id), f=(n,d=3)=>(Math.abs(n)<1e-9?0:+n.toFixed(d)).toString().replace('.',',');
-const ang=$('ang');
-function drawCircle(){
-  const d=+ang.value, r=d*Math.PI/180, R=100, x=R*Math.cos(r), y=-R*Math.sin(r);
-  $('angv').textContent=d+'°';
-  $('pt').setAttribute('cx',x);$('pt').setAttribute('cy',y);
-  $('rad').setAttribute('x2',x);$('rad').setAttribute('y2',y);
-  $('sinL').setAttribute('x1',x);$('sinL').setAttribute('y1',0);$('sinL').setAttribute('x2',x);$('sinL').setAttribute('y2',y);
-  $('cosL').setAttribute('x1',0);$('cosL').setAttribute('y1',0);$('cosL').setAttribute('x2',x);$('cosL').setAttribute('y2',0);
-  const ax=26*Math.cos(r), ay=-26*Math.sin(r);
-  $('arc').setAttribute('d',d<=0?'':`M26 0 A26 26 0 ${d>180?1:0} 0 ${ax} ${ay}`);
-  $('vs').textContent=f(Math.sin(r));$('vc').textContent=f(Math.cos(r));
-  $('vt').textContent=(d%180===90)?'tak terdef.':f(Math.tan(r));
-  $('vr').textContent=f(r,2);
-}
-ang.addEventListener('input',drawCircle);drawCircle();
+            <div class="card">
+                <div class="card-icon">🌊</div>
+                <h3>Grafik Fungsi</h3>
+                <p>Fungsi sinus dan cosinus membentuk gelombang periodik dengan amplitudo 1 dan periode 360° (2π radian).</p>
+                <div class="formula">y = A sin(Bx + C)</div>
+            </div>
+        </div>
 
-function calc(){
-  const a=+$('a').value,b=+$('b').value;
-  if(!(a>0&&b>0)){$('calc').textContent='Isi kedua sisi dengan angka lebih dari 0.';return}
-  const m=Math.hypot(a,b),th=Math.atan2(a,b)*180/Math.PI;
-  $('calc').innerHTML=`Sisi miring = √(${f(a)}² + ${f(b)}²) = <b>${f(m)}</b><br>
-  <span class="s">sin θ = ${f(a)}/${f(m)} = <b>${f(a/m)}</b></span><br>
-  <span class="c">cos θ = ${f(b)}/${f(m)} = <b>${f(b/m)}</b></span><br>
-  <span class="t">tan θ = ${f(a)}/${f(b)} = <b>${f(a/b)}</b></span><br>
-  Besar sudut θ ≈ <b>${f(th,2)}°</b>`;
-}
-$('a').addEventListener('input',calc);$('b').addEventListener('input',calc);calc();
+        <!-- Tabel sudut istimewa -->
+        <div class="special-angles" id="sudut-istimewa">
+            <h3>⭐ Tabel Sudut Istimewa (0° – 90°)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sudut</th>
+                        <th>0°</th>
+                        <th>30°</th>
+                        <th>45°</th>
+                        <th>60°</th>
+                        <th>90°</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>sin</strong></td>
+                        <td>0</td>
+                        <td>½</td>
+                        <td>½√2</td>
+                        <td>½√3</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>cos</strong></td>
+                        <td>1</td>
+                        <td>½√3</td>
+                        <td>½√2</td>
+                        <td>½</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>tan</strong></td>
+                        <td>0</td>
+                        <td>⅓√3</td>
+                        <td>1</td>
+                        <td>√3</td>
+                        <td>∞</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
 
-const Q=[
- {q:'Pada segitiga siku-siku, sin θ sama dengan …',o:['depan / miring','samping / miring','depan / samping'],a:0},
- {q:'Berapa nilai cos 60°?',o:['½√3','1/2','1'],a:1},
- {q:'Jika sin θ = 5/13 dan θ lancip, maka cos θ = …',o:['12/13','5/12','8/13'],a:0},
- {q:'180° sama dengan … radian.',o:['π/2','π','2π'],a:1}
-];
-$('quiz').innerHTML=Q.map((x,i)=>`<div class="q"><p>${i+1}. ${x.q}</p>${x.o.map((t,j)=>`<button type="button" class="alt" data-i="${i}" data-j="${j}">${t}</button>`).join('')}<div class="fb" aria-live="polite"></div></div>`).join('');
-$('quiz').addEventListener('click',e=>{
-  const b=e.target.closest('button');if(!b)return;
-  const i=+b.dataset.i,j=+b.dataset.j,box=b.parentElement,ok=j===Q[i].a;
-  box.querySelectorAll('button').forEach(x=>x.classList.remove('ok','no'));
-  b.classList.add(ok?'ok':'no');
-  box.querySelector('.fb').textContent=ok?'Benar.':'Belum tepat, coba pilihan lain.';
-});
-</script>
+    <!-- KUIS -->
+    <section id="kuis">
+        <h2 class="section-title">🧠 Uji Pemahaman</h2>
+        <p class="section-subtitle">Coba jawab pertanyaan berikut untuk menguji pemahamanmu</p>
+
+        <div class="quiz-container">
+            <div class="quiz-question" id="questionText">Memuat pertanyaan...</div>
+            <div class="quiz-options" id="optionsContainer"></div>
+            <div class="quiz-feedback" id="feedback"></div>
+            <button class="quiz-btn" id="checkBtn" onclick="checkAnswer()">Periksa Jawaban</button>
+            <button class="quiz-btn" id="nextBtn" onclick="nextQuestion()" style="display:none; margin-left:0.8rem;">Soal Berikutnya →</button>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-brand">△ Trigonometri Kelas X</div>
+        <p>Dibuat untuk pembelajaran yang menyenangkan · Sinergi Sudut &amp; Rasio</p>
+    </footer>
+
+    <script>
+        // Data kuis
+        const quizData = [
+            {
+                question: "Nilai sin 30° adalah...",
+                options: ["½", "½√2", "½√3", "1"],
+                answer: 0,
+                explanation: "sin 30° = ½ (sudut istimewa)."
+            },
+            {
+                question: "Jika cos θ = 0,5 dan θ berada di kuadran I, maka θ = ...",
+                options: ["30°", "45°", "60°", "90°"],
+                answer: 2,
+                explanation: "cos 60° = 0,5. Jadi θ = 60°."
+            },
+            {
+                question: "Identitas Pythagoras yang benar adalah...",
+                options: ["sin²θ − cos²θ = 1", "sin²θ + cos²θ = 1", "sin θ + cos θ = 1", "tan²θ + 1 = sin²θ"],
+                answer: 1,
+                explanation: "sin²θ + cos²θ = 1 adalah identitas Pythagoras."
+            },
+            {
+                question: "Nilai tan 45° adalah...",
+                options: ["0", "½", "1", "√3"],
+                answer: 2,
+                explanation: "tan 45° = 1 karena sin 45° = cos 45°."
+            },
+            {
+                question: "Dalam segitiga siku-siku, sin θ didefinisikan sebagai...",
+                options: ["samping / miring", "depan / samping", "depan / miring", "miring / depan"],
+                answer: 2,
+                explanation: "sin θ = sisi depan sudut / sisi miring."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let selectedOption = null;
+        let answered = false;
+
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedback = document.getElementById('feedback');
+        const checkBtn = document.getElementById('checkBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function loadQuestion() {
+            const q = quizData[currentQuestion];
+            questionText.textContent = `${currentQuestion + 1}. ${q.question}`;
+            optionsContainer.innerHTML = '';
+            feedback.textContent = '';
+            feedback.style.color = '';
+            selectedOption = null;
+            answered = false;
+            checkBtn.disabled = false;
+            checkBtn.style.display = 'inline-block';
+            nextBtn.style.display = 'none';
+
+            q.options.forEach((opt, index) => {
+                const div = document.createElement('div');
+                div.classList.add('quiz-option');
+                div.textContent = `${String.fromCharCode(65 + index)}. ${opt}`;
+                div.dataset.index = index;
+                div.addEventListener('click', () => {
+                    if (answered) return;
+                    document.querySelectorAll('.quiz-option').forEach(el => el.classList.remove('selected'));
+                    div.classList.add('selected');
+                    selectedOption = index;
+                });
+                optionsContainer.appendChild(div);
+            });
+        }
+
+        function checkAnswer() {
+            if (selectedOption === null) {
+                feedback.textContent = '⚠️ Pilih salah satu jawaban terlebih dahulu.';
+                feedback.style.color = '#fbbf24';
+                return;
+            }
+            if (answered) return;
+
+            answered = true;
+            const q = quizData[currentQuestion];
+            const options = document.querySelectorAll('.quiz-option');
+
+            options.forEach((opt, i) => {
+                opt.style.pointerEvents = 'none';
+                if (i === q.answer) {
+                    opt.classList.add('correct');
+                }
+                if (i === selectedOption && i !== q.answer) {
+                    opt.classList.add('wrong');
+                }
+            });
+
+            if (selectedOption === q.answer) {
+                feedback.textContent = '✅ Benar! ' + q.explanation;
+                feedback.style.color = '#4ade80';
+            } else {
+                feedback.textContent = '❌ Kurang tepat. ' + q.explanation;
+                feedback.style.color = '#f87171';
+            }
+
+            checkBtn.disabled = true;
+            checkBtn.style.display = 'none';
+            nextBtn.style.display = 'inline-block';
+
+            if (currentQuestion === quizData.length - 1) {
+                nextBtn.textContent = '🔄 Ulangi Kuis';
+            } else {
+                nextBtn.textContent = 'Soal Berikutnya →';
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion === quizData.length - 1) {
+                currentQuestion = 0;
+            } else {
+                currentQuestion++;
+            }
+            loadQuestion();
+        }
+
+        // Inisialisasi
+        loadQuestion();
+    </script>
 </body>
 </html>
